@@ -10,6 +10,7 @@ using WebApplication3.Models;
 
 namespace WebApplication3.Controllers
 {
+    //https://digitalmccullough.com/posts/aspnetcore-auth-system-demystified.html
     public class AccountController : Controller
     {
         //private readonly IUserService _userService;
