@@ -28,7 +28,7 @@ namespace WebApplication3
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => 
                 {
-                    options.LoginPath = "Account/Login";
+                    options.LoginPath = "/Account/Login";
                 });
 
             //services.AddAuthentication(options =>

@@ -1,8 +1,63 @@
-﻿@{
+﻿@model ListaPaginada<Produto>
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        [SAMPLE] Lista paginada de produtos.
+    </div>
+    <table class="table card-body">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descrição</th>
+                <th>Categoria</th>
+                <th>Preço Unitário</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var prod in Model)
+            {
+            <tr>
+                <td>@prod.Id</td>
+                <td>@prod.Descricao</td>
+                <td>@prod.Categoria</td>
+                <td>@prod.PrecoUnitario</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <div class="card-footer">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                @if (Model.PaginaAnterior < Model.Atual)
+                {
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index" asp-route-pagina="@Model.PaginaAnterior" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                }
+                @foreach (var pg in Model.Paginas)
+                {
+                    var ativo = (Model.Atual == pg) ? "active" : "";
+                    <li class="page-item @ativo"><a class="page-link" asp-action="Index" asp-route-pagina="@pg">@pg</a></li>
+                }
+                @if (Model.Atual < Model.ProximaPagina)
+                {
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index" asp-route-pagina="@Model.ProximaPagina" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                }
+            </ul>
+        </nav>
+    </div>
 </div>
